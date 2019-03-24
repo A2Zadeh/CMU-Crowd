@@ -15,5 +15,5 @@ class WorkerSignUpView(CreateView):
 
     def form_valid(self, form):
         user = form.save()
-        return redirect('login')
+        return redirect('accounts/login')
 
