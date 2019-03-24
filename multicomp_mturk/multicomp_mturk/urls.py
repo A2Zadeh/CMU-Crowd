@@ -18,7 +18,7 @@ from django.urls import include,path
 from main.views import main, workers, admins
 
 urlpatterns = [
-    #path('', include('main.urls')),
+    path('', include('main.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/signup/', main.SignUpView.as_view(), name='signup'),
     path('accounts/signup/worker/', workers.WorkerSignUpView.as_view(), name='worker_signup'),

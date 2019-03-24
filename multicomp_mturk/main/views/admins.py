@@ -1,5 +1,5 @@
 from django.contrib.auth import login
-from django.shortcuts import redirect
+from django.shortcuts import redirect,render
 from django.views.generic import CreateView
 from main.models import User
 from ..forms import AdminSignUpForm
@@ -17,3 +17,5 @@ class AdminSignUpView(CreateView):
         user = form.save()
         return redirect('login')
 
+def panel(request):
+  return render(request,'main/admins/panel.html')
