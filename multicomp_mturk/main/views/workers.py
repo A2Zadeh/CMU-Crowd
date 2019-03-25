@@ -17,5 +17,6 @@ class WorkerSignUpView(CreateView):
         user = form.save()
         return redirect('accounts/login')
 
+
 def dash(request):
   return render(request,'main/workers/dash.html')
