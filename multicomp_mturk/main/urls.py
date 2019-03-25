@@ -9,6 +9,7 @@ urlpatterns = [
     ], 'main'), namespace='workers')),
  path('admins/', include(([
         path('', admins.panel, name='panel'),
+        path('job/add/',admins.JobCreateView.as_view(),name="create_job")
     ], 'main'), namespace='admins')),
 
 ]
