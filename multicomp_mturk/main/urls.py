@@ -1,6 +1,7 @@
 from django.urls import include, path
-
 from .views import main, workers, admins
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
  path('',main.home,name='home'),
@@ -13,3 +14,7 @@ urlpatterns = [
     ], 'main'), namespace='admins')),
 
 ]
+
+
+if settings.DEBUG: #development
+  urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

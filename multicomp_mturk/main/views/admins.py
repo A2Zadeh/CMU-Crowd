@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import login
 from django.shortcuts import redirect,render
 from django.views.generic import CreateView
-from main.models import User,Job
+from main.models import User,Job,Admin
 from ..forms import AdminSignUpForm
 
 class AdminSignUpView(CreateView):
@@ -27,7 +27,7 @@ class JobCreateView(CreateView):
     template_name = 'main/admins/create_job_form.html'
 
     def form_valid(self,form):
-        job = form.save(commit=False)
+        job = form.save(commit=True)
         admin = Admin.objects.get(user=self.request.user)
         job.admins.add(admin)
         job.save()
