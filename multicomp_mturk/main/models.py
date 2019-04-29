@@ -38,6 +38,7 @@ class Batch(models.Model):
   modified_date = models.DateTimeField(auto_now=True)
   job = models.ForeignKey(Job,on_delete=models.PROTECT)
   content = models.TextField()
+  num_HITs = models.IntegerField(default=10)
   is_completed = models.BooleanField(default=False)
   is_cancelled = models.BooleanField(default=False)
 

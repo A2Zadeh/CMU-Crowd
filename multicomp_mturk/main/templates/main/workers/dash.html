@@ -1,1 +1,9 @@
 <h1> WORKER DASHBOARD </h1>
+
+{% for job in jobs %}
+  <div class="row">
+  {{ job.title }} <a href="{% url 'workers:jobs' job.id %}"> DO THIS JOB </a>
+  </div>
+{% endfor %}
+
+<a href="{%url 'logout' %}"> Logout </a>

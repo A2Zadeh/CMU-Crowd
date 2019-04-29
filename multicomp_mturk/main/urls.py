@@ -7,10 +7,12 @@ urlpatterns = [
  path('',main.home,name='home'),
  path('workers/', include(([
         path('', workers.dash, name='dash'),
+        path('jobs/<job_id>',workers.jobs,name="jobs")
     ], 'main'), namespace='workers')),
  path('admins/', include(([
         path('', admins.panel, name='panel'),
-        path('job/add/',admins.JobCreateView.as_view(),name="create_job")
+        path('job/add/',admins.JobCreateView.as_view(),name="create_job"),
+        path('batch/start/',admins.BatchCreateView.as_view(),name="start_batch")
     ], 'main'), namespace='admins')),
 
 ]

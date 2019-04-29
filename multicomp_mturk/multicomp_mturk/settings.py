@@ -52,10 +52,18 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'multicomp_mturk.urls'
 
+#Media (Uploaded HTML Templates)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+JOB_TEMPLATE_DIR = os.path.join(MEDIA_ROOT,'job_templates')
+#os.path.join(BASE_DIR, 'templates')
+#print(JOB_TEMPLATE_DIR)
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),MEDIA_ROOT],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -100,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LOGIN_REDIRECT_URL = 'dash'
+LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
 # Internationalization
@@ -122,9 +130,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-#Media (Uploaded HTML Templates)
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 

@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import login
 from django.shortcuts import redirect,render
 from django.views.generic import CreateView
-from main.models import User,Job,Admin
+from main.models import User,Job,Admin,Batch
 from ..forms import AdminSignUpForm
 
 class AdminSignUpView(CreateView):
@@ -16,7 +16,7 @@ class AdminSignUpView(CreateView):
 
     def form_valid(self, form):
         user = form.save()
-        return redirect('login')
+        return redirect('home')
 
 def panel(request):
   return render(request,'main/admins/panel.html')
@@ -33,3 +33,13 @@ class JobCreateView(CreateView):
         job.save()
         messages.success(self.request,"Job created successfully.")
         return redirect('admins:panel')
+
+class BatchCreateView(CreateView):
+    model = Batch
+    fields = ('job','content','num_HITs')
+    template_name = "main/admins/create_batch_form.html"
+
+    def form_valid(self,form):
+        batch = form.save(commit=True)
+    #pass
+
