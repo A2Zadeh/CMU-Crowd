@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1> View Batches </h1>
+{% for k,v in batches.items %}
+ <h2> {{k}} </h2>
+ {%for batch in v %}
+   {{batch}}, {{batch.num_HITs}} HITs <a href="#"> Download data as JSON</a>
+ {% endfor %}
+{% endfor %}
+{% endblock %}
