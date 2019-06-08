@@ -11,6 +11,7 @@
       </button>
     </div>
   {% endif %}
+  <!--
   <div class="container">
   <div class="row">
     <div class="col-lg-4 col-md-6 col-sm-8 col-12">
@@ -25,4 +26,58 @@
     </div>
   </div>
 </div>
+-->
+
+<style>
+
+
+.form-signin {
+  width: 100%;
+  max-width: 420px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+
+
+
+.fieldWrapper {
+  margin-bottom: 20px;
+  }
+  </style>
+
+
+
+<form class="form-signin" method="post">
+  {% csrf_token %}
+  <h1 class="h3 mb-3 font-weight-normal">Sign in</h1>
+   <div class="card">
+      <div class="card-body">
+        {% for field in form %}
+        <div class='fieldWrapper'>
+           {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+       </div>
+        {% endfor %}
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </div>
+  </div>
+</form>
+<!--
+<form class="form-signin" method="post">
+         {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+      <h1 class="h3 mb-3 font-weight-normal">Sign in</h1>
+      <div class="card">
+      <div class="card-body">
+      <label for="{{form.username.id_for_label}}" class="sr-only">Username</label>
+     <input  id="id_username" class="form-control" placeholder="form.username.label" required autofocus> 
+     {{form.username}}
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </div>
+  </div>
+</form>
+-->
 {% endblock %}
