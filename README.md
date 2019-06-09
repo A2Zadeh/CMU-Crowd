@@ -34,7 +34,7 @@ pip3 install -r requirements.txt
 ```
 You should now have an instance of the webapp running on your localhost.
 
-## Deployingto Production
+## Deploying to Production
 
 
 ## Usage
