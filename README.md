@@ -68,7 +68,7 @@ Further examples are also included in the example_templates folder.
 - ensure that form has submit button 
 
 ### Linking static files (CSS/JS/Images)
-Static files should be placed in the /static folder and loaded with the static tag. You can change where your static files are being served from. If you are unfamiliar with serving static files in Django, refer to [this guide](https://docs.djangoproject.com/en/2.1/howto/static-files/).
+Static files should be placed in the /static folder and loaded with the static tag. You can change where your static files are being served from in settings.py. If you are unfamiliar with serving static files in Django, refer to [this guide](https://docs.djangoproject.com/en/2.1/howto/static-files/).
 
 
 ### Passing context data to templates
