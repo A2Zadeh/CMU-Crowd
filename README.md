@@ -15,6 +15,9 @@ tracking worker statistics and launching tasks easily.
 ## Usage
 
 ### Valid HTML Templates
+- mention csrf token that django needs
+- ensure that form has submit button 
+
 
 ### Passing context data to templates
 
