@@ -3,13 +3,21 @@ CMU-Crowd is a Human Intelligence Task (HIT) platform that is fully customisable
 It may be used as a complete solution by simply providing HTML templates for jobs and using example templates that come with it, or serve as a starting point for dealing with different levels of worker authentication,
 tracking worker statistics and launching tasks easily.
 
-##Functionality
+## Functionality
 
 
-##Installation
+## Installation
 
 
-##Setup & Deployment
+## Setup & Deployment
 
 
-### 
+## Usage
+
+### Valid HTML Templates
+
+### Passing context data to templates
+
+### Launching Jobs
+
+
