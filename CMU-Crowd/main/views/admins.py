@@ -1,9 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect,render
 from django.views.generic import CreateView
 from main.models import User,Job,Admin,Batch
 from ..forms import AdminSignUpForm
+from ..decorators import admin_required
 
 import pdb
 
@@ -19,9 +21,14 @@ class AdminSignUpView(CreateView):
     def form_valid(self, form):
         user = form.save()
         return redirect('home')
-
+        
+@login_required
+@admin_required
 def panel(request):
   return render(request,'main/admins/panel.html')
+
+
+
 
 class JobCreateView(CreateView):
     model = Job
@@ -47,6 +54,8 @@ class BatchCreateView(CreateView):
         return redirect('admins:panel')
     #pass
 
+@login_required
+@admin_required
 def view_batches(request):
     admin = Admin.objects.get(user=request.user)
     admin_jobs = admin.job_set.all()
