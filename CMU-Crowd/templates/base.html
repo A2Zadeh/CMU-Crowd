@@ -35,7 +35,17 @@ body {
 <body>
         <header>
           <!-- 3 diff navbars, one for home page (when not logged in, one for worker login, one for admin login -->
-      <!-- Fixed navbar -->
+          {% if request.user.is_authenticated %}
+            {% if request.user.is_worker %}
+               {% include 'worker_navbar.html' %}
+            {% elif request.user.is_admin %}
+              {% include 'admin_navbar.html' %}
+            {% endif %}
+
+          {% else %}
+           {% include 'base_navbar.html' %}
+          {% endif %}
+      <!-- Fixed navbar 
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <a class="navbar-brand" href="#">CMU-Crowd</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,8 +65,8 @@ body {
           </ul>
         </div>
       </nav>
+    -->
     </header>
-
 
   <main role="main">
     {% block content %}
@@ -65,7 +75,7 @@ body {
   <footer class="footer navbar-fixed-bottom">
     <div class="container">
     <font size="1em">
-      This site is owned and operated by the <a href="http://multicomp.cs.cmu.edu">Multimodal Communication and Machine Learning Lab (Multicomp Lab)</a>, part of the <a href="https://www.lti.cs.cmu.edu/">Language Technologies Institute</a> in the <a href="http://scs.cmu.edu/">School of Computer Science</a> at <a href="http://cmu.edu">Carnegie Mellon University</a>. </font>
+      This site was built using <a href="https://github.com/A2Zadeh/CMU-Crowd">CMU-Crowd</a>, developed  by the <a href="http://multicomp.cs.cmu.edu">Multimodal Communication and Machine Learning Lab (Multicomp Lab)</a>, part of the <a href="https://www.lti.cs.cmu.edu/">Language Technologies Institute</a> in the <a href="http://scs.cmu.edu/">School of Computer Science</a> at <a href="http://cmu.edu">Carnegie Mellon University</a>. </font>
     </div>
   </footer>
 </body>
