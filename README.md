@@ -73,11 +73,11 @@ Django uses key-value pairs called context to pass data into HTML template. It i
 
 For example, we can define a context dictionary like so:
 ```python
-context = {'question':"What is your full name"}
+context = {'question':'What is your full name?'}
 ```
 and access the data as follows:
 ```HTML
-<p> {{question }} </p>
+<p> Question 1: {{question}} </p>
 ```
 
 
