@@ -15,6 +15,7 @@ tracking worker statistics and launching tasks easily.
 ## Usage
 
 ### Valid HTML Templates
+- needs method="post"
 - mention csrf token that django needs
 - ensure that form has submit button 
 
