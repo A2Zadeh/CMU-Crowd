@@ -17,7 +17,7 @@ python 3.x, tested with 3.6 and 3.7
 1. (recommended) Activate a virtual enviroment 
 ```console
 python3 -m venv <$your_venv_name>
-source <your_venv_name>/bin/activate
+source <$your_venv_name>/bin/activate
 ```
 2. Install required modules 
 ```console
