@@ -11,7 +11,7 @@ tracking worker statistics and launching tasks easily.
 
 ## Setup
 
-###Requirements: 
+### Requirements: 
 python 3.x, tested with 3.6 and 3.7
 
 1. (recommended) Activate a virtual enviroment 
