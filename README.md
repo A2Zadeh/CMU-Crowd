@@ -6,10 +6,35 @@ tracking worker statistics and launching tasks easily.
 ## Functionality
 
 
-## Installation
 
 
-## Setup & Deployment
+
+## Setup
+
+###Requirements: 
+python 3.x, tested with 3.6 and 3.7
+
+1. (recommended) Activate a virtual enviroment 
+```console
+python3 -m venv <$your_venv_name>
+source <your_venv_name>/bin/activate
+```
+2. Install required modules 
+```console
+pip3 install -r requirements.txt
+```
+3. Make Django database migrations
+```console
+./manage.py makemigrations
+./manage.py migrate
+```
+4. Test on localhost 
+```console
+./manage.py runserver
+```
+You should now have an instance of the webapp running on your localhost.
+
+## Deployment to Production
 
 
 ## Usage
