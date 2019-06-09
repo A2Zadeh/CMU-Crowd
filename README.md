@@ -34,18 +34,47 @@ pip3 install -r requirements.txt
 ```
 You should now have an instance of the webapp running on your localhost.
 
-## Deployment to Production
+## Deployingto Production
 
 
 ## Usage
 
 ### Valid HTML Templates
+Essentially, the HTML template for a job will be a POST form. Because of this, there are certain requirements in order for the template to render correctly.
+
+Make sure you include "post" as the form method, that the form has a submit button and that you include the {% csrf_token %} tag as we use Django's inbuilt templating system. You will also want a appopriate name for each input field in your form, so that when the data is saved to the database as a JSON dictionary you can access its contents easily.
+
+It is also highly recommend to extend 'base.html', as this is where the navigation bar is included, but you could always write your own navigation as long as the links are valid. If you choose to extend 'base.html', note that your form must be placed within the block content. 
+
+A very simple example of a valid HTML template that simply asks the user for their name (and extends 'base.html') is as follows:
+
+```HTML
+{% extends "base.html" %}
+
+{% block content %}
+<form method="post">
+{% csrf_token %}
+<p> What is your full name? </p>
+<input type="text" name="full_name">
+<button type="submit" class="btn btn-success"> Submit </button>
+</form>
+{% endblock %}
+```
+Further examples are also included in the example_templates folder.
+
+
 - needs method="post"
 - mention csrf token that django needs
 - ensure that form has submit button 
 
+### Linking static files (CSS/JS/Images)
+Static files should be placed in the /static folder and loaded with the static tag. You can change where your static files are being served from. If you are unfamiliar with serving static files in Django, refer to [this guide](https://docs.djangoproject.com/en/2.1/howto/static-files/).
+
 
 ### Passing context data to templates
+
+
+### How data is saved
 
 ### Launching Jobs
 To create a job, you must 
