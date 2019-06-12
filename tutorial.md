@@ -28,6 +28,10 @@ Fill in the required fields. For the HTML template, this is the file I am going 
 {% endblock %}
 ```
 
+### Batch Creation
+Now that we have our job created, we have to launch a batch so workers can begin annotating.  Go to the 'Create Batch' tab on the navigation bar.
+
+
 ## Extending the worker model
 For our dataset, it makes sense to store information about the worker's height, weight and gender. We can extend the Worker model in models.py, and then
 either ask them for their height, weight and gender when they signup, or when they complete their first annotation. 
