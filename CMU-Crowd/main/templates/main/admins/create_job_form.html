@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load field_type %}
+{% load custom_tags %}
 
 {% block content %}
   {% if form.non_field_errors %}
@@ -15,7 +15,9 @@
 
 <div class="container">
     <div class="row">
-      <h2> Create Job </h2>
+      <div class="col">
+        <h2> Create Job </h2>
+      </div>
     </div>
       <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
