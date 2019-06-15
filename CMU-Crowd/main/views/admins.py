@@ -27,7 +27,10 @@ class AdminSignUpView(CreateView):
 @login_required
 @admin_required
 def panel(request):
-  return render(request,'main/admins/panel.html')
+    admin = Admin.objects.get(user=request.user)
+
+    context = {"active_job_count":Job.objects.filter(admins=admin).count() }
+    return render(request,'main/admins/panel.html',context)
 
 
 
