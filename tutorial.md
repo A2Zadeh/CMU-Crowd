@@ -20,9 +20,17 @@ Fill in the required fields. For the HTML template, this is the file I am going 
 <form method="post">
 {% csrf_token %}
 {% if first_annotation %}
-  <p>  What is your Height? </p>
-  <input type="text" name="full_name">
+  <p>  What is your height? </p>
+  <input type="text" name="height">
+    <p>  What is your weight? </p>
+  <input type="text" name="weight">
+      <p>  What is your gender? </p>
+  <input type="text" name="gender">
  {% endif %} 
+  <p> What did you eat for lunch? </p>
+    <input type="text" name="food">
+    <p> How many calories did this have? </p>
+    <input type="text" name="calories">
 <button type="submit" class="btn btn-success"> Submit </button>
 </form>
 {% endblock %}
