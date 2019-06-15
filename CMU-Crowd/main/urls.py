@@ -7,6 +7,8 @@ urlpatterns = [
  path('',main.home,name='home'),
  path('workers/', include(([
         path('', workers.dash, name='dash'),
+        path('view_annotations',workers.view_annotations, name='view_annotations'),
+        path('view_jobs',workers.view_jobs, name='view_jobs'),
         path('jobs/<job_id>',workers.jobs,name="jobs")
     ], 'main'), namespace='workers')),
  path('admins/', include(([

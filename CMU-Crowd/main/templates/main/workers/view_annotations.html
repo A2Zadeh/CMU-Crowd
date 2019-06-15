@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-center"> View Annotations </h1>
+<hr />
+<div class="container">
+  <div class="row">
+	 <div class="col">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Job</th>
+          <th scope="col">Date Submitted</th>
+          <th scope="col">Hourly Pay</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for a in annotations %}
+          <tr>
+             <th scope="row"> {{a.id}} </th>
+             <td> {{a.batch.job.title}} </td>
+             <td> {{a.created_date}} </td>
+             <td> {{a.batch.job.hourly_pay}} </td>
+          <tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

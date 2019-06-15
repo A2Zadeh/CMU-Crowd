@@ -130,6 +130,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+#CMU-Crowd Settings
+CONTACT_EMAIL = 'mkchan@cs.cmu.edu'
+PROJECT_TITLE = 'Test'
 
 
 

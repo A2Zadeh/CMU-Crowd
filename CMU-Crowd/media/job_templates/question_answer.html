@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form method="post">
+{% csrf_token %}
+<p> What is your first name? </p>
+<input type="text" name="first_name">
+<p> What is your last name? </p>
+<input type="text" name="last_name">
+<p> Which country do you live in? </p>
+<input type="text" name="country">
+<p> How old are you? </p>
+<input type="number" name="age">
+<button type="submit" class="btn btn-success"> Submit </button>
+</form>
+{% endblock %}

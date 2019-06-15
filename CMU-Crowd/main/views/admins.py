@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.shortcuts import redirect,render
 from django.views.generic import CreateView
 from main.models import User,Job,Admin,Batch
@@ -8,6 +9,7 @@ from ..forms import AdminSignUpForm
 from ..decorators import admin_required
 
 import pdb
+
 
 class AdminSignUpView(CreateView):
     model = User
@@ -21,7 +23,7 @@ class AdminSignUpView(CreateView):
     def form_valid(self, form):
         user = form.save()
         return redirect('home')
-        
+
 @login_required
 @admin_required
 def panel(request):
@@ -30,6 +32,7 @@ def panel(request):
 
 
 
+@method_decorator([login_required, admin_required], name='dispatch')
 class JobCreateView(CreateView):
     model = Job
     fields = ('title','description','hourly_pay','html_template',)
@@ -43,6 +46,8 @@ class JobCreateView(CreateView):
         messages.success(self.request,"Job created successfully.")
         return redirect('admins:panel')
 
+
+@method_decorator([login_required, admin_required], name='dispatch')
 class BatchCreateView(CreateView):
     model = Batch
     fields = ('job','content','num_HITs')

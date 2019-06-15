@@ -6,10 +6,10 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Browse Available Jobs <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="{%url 'workers:view_jobs' %}">Browse Available Jobs <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item  active">
-              <a class="nav-link" href="#"> View Submitted Work</a>
+              <a class="nav-link" href="{%url 'workers:view_annotations' %}"> View Submitted Work</a>
             </li>
             <li class="nav-item  active">
               <a class="nav-link disabled" href="{%url 'logout' %}"> Logout </a>

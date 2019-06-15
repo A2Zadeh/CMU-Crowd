@@ -17,7 +17,7 @@ class Worker(models.Model):
   user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
   time_worked = models.IntegerField(default=0)
   is_approved = models.BooleanField(default=False)  
-
+  ##TODO: manually approve worker for each job, worker has a list of approved jobs (job ids)
   ##TODO: statistics of jobs done fields?
 
 
@@ -31,7 +31,11 @@ class Job(models.Model):
   hourly_pay = models.DecimalField(decimal_places=2, max_digits=5)
   admins = models.ManyToManyField(Admin)
   html_template = models.FileField(upload_to="job_templates")
+  #TODO: image for job 
   #content = models.TextField()
+
+  def __str__(self):
+    return self.title
 
 class Batch(models.Model):
   created_date = models.DateTimeField(auto_now_add=True)

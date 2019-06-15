@@ -23,6 +23,7 @@
         {% for field in form %}
        <div class="form-row">
           <div class="form-group col-md-12">
+            {{field.label}}
             {{field| addcss:'form-control'}}
              {%if form.title.errors %}
              <div class="alert alert-danger" style="margin-top:10px" role="alert">
