@@ -1,6 +1,46 @@
 {% extends 'base.html' %}
+{% load custom_tags %}
 
 {% block content %}
+  {% if form.non_field_errors %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      {% for error in form.non_field_errors %}
+        <p{% if forloop.last %} class="mb-0"{% endif %}>{{ error }}</p>
+      {% endfor %}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  {% endif %}
+
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h2> Create Batch</h2>
+      </div>
+    </div>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+        {% for field in form %}
+       <div class="form-row">
+          <div class="form-group col-md-12">
+            {{field.label}}
+            {{field| addcss:'form-control'}}
+             {%if form.title.errors %}
+             <div class="alert alert-danger" style="margin-top:10px" role="alert">
+             {{ form.title.errors }}
+            </div>
+             {% endif %}
+            </div>
+       </div>
+       {% endfor %}
+        <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+  <!--
   <div class="row">
     <div class="col-md-8 col-sm-10 col-12">
       <h2>Start Batch</h2>
@@ -12,4 +52,5 @@
       </form>
     </div>
   </div>
+-->
 {% endblock %}
