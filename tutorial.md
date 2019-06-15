@@ -35,6 +35,7 @@ Fill in the required fields. For the HTML template, this is the file I am going 
 </form>
 {% endblock %}
 ```
+Note that {{meal}} is going to be a randomly generated meal choice from bfast,lunch,dinner to give an exapmle of batch content
 
 ### Batch Creation
 Now that we have our job created, we have to launch a batch so workers can begin annotating.  Go to the 'Create Batch' tab on the navigation bar.
