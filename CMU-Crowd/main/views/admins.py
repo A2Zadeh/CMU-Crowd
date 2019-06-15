@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.shortcuts import redirect,render
 from django.views.generic import CreateView
-from main.models import User,Job,Admin,Batch
+from main.models import User,Job,Admin,Batch,Worker,Annotation
 from ..forms import AdminSignUpForm
 from ..decorators import admin_required
 
@@ -89,6 +89,23 @@ def view_batches(request):
     #pdb.set_trace()
     return render(request,'main/admins/view_batches.html',context)
 
+@login_required
+@admin_required
+def manage_workers(request):
+    def worker_statistics(worker):
+        stats = dict()
+        stats['id'] = worker.user.id
+        stats['username'] = worker.user.username
+        stats['date_joined'] = worker.user.date_joined
+        stats['num_anns'] = Annotation.objects.filter(worker=worker).count()
 
+        return stats
+
+
+    workers = [worker_statistics(w) for w in Worker.objects.all()]
+    context = {'workers':workers}
+
+
+    return render(request,'main/admins/manage_workers.html',context)
 
 

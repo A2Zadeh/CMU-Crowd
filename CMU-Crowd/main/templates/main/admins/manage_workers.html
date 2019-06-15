@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-center"> Manage Workers </h1>
+<hr />
+<div class="container">
+  <div class="row">
+   <div class="col">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Username</th>
+          <th scope="col">Number of Annotations</th>
+          <th scope="col">Date Joined</th>
+          <th scope="col"> Status </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for w in workers %}
+          <tr>
+             <th scope="row"> {{w.id}} </th>
+             <td> {{w.username}} </td>
+             <td> {{w.num_anns}} </td>
+             <td> {{w.date_joined}} </td>
+          <tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
