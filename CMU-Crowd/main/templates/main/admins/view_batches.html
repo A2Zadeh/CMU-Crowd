@@ -7,10 +7,32 @@
 {% for k,v in batches.items %}
 	<div class="row">
 		<div class="col">
- <h2> {{k}} </h2>
- {%for batch in v %}
-   {{batch}}, {{batch.num_HITs}} HITs <a href="#"> Download data as JSON</a>
- {% endfor %}
+			<table class="table">
+				<thead>
+				 <h2> {{k}} </h2>
+					<tr>
+						<th> ID </th>
+						<th> Number of HITs </th>
+						<th> Created Date </th>
+						<th> % Completed </th>
+						<th> Download </th>
+						<th> Status </th>
+					</tr>
+				</thead>
+				<tbody>
+					{%for batch in v %}
+						<tr>
+            				<th scope="row"> {{batch.id}} </th>
+             				<td> {{batch.num_HITs}}</td>
+            				<td> {{batch.created_date}} </td>
+            				<td> 1%</td>
+            				<td> DL </td>
+            				<td> <span class="badge badge-pill badge-primary"> Active </span> </td>
+         				<tr>
+							   {{batch}}, {{batch.num_HITs}} HITs <a href="#"> Download data as JSON</a>
+					{% endfor %}
+		 		</tbody>
+		</table>
 {% endfor %}
 		</div>
 	</div>

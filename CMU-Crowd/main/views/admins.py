@@ -65,11 +65,26 @@ class BatchCreateView(CreateView):
 @login_required
 @admin_required
 def view_batches(request):
+
+    # def batch_status(batch):
+    #     if batch.cancelled:
+    #         #danger
+    #     elif batch.completed:
+    #         #success
+    #     else:
+    #         #primary
+    def batch_data(batch):
+        #num_completed = Annotation.objects.filter(batch=b).count()
+        pass 
+
+
     admin = Admin.objects.get(user=request.user)
     admin_jobs = admin.job_set.all()
     admin_batches = dict()
     for j in admin_jobs:
+        #admin_batches[j.title] = [batch_data(b) for b in Batch.objects.filter(job=j)]
         admin_batches[j.title] = list(Batch.objects.filter(job=j))
+
     context = {'batches':admin_batches}
     #pdb.set_trace()
     return render(request,'main/admins/view_batches.html',context)
