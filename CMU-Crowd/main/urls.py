@@ -16,6 +16,7 @@ urlpatterns = [
         path('job/add/',admins.JobCreateView.as_view(),name="create_job"),
         path('batch/start/',admins.BatchCreateView.as_view(),name="start_batch"),
         path('batches',admins.view_batches,name="view_batches"),
+        path('update_batch/<batch_id>',admins.update_batch,name="update_batch"),
         path('manage_workers',admins.manage_workers,name="manage_workers")
     ], 'main'), namespace='admins')),
 

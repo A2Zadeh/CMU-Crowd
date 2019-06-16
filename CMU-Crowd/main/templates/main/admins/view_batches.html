@@ -16,9 +16,9 @@
 						<th> Number of HITs </th>
 						<th> Created Date </th>
 						<th> % Completed </th>
-						<th> Download </th>
 						<th> Status </th>
 						<th> Cancel/Restart </th>
+						<th> Download </th>
 					</tr>
 				</thead>
 				<tbody>
@@ -28,18 +28,23 @@
              				<td> {{batch.num_HITs}}</td>
             				<td> {{batch.created_date}} </td>
             				<td> {{batch.percent_completion}} </td>
-            				<td> DL </td>
             				<td> <span class="badge badge-pill badge-{{batch.status_class}}"> _____ </span> </td>
             				<td>
         					{% if not batch.completed %}
-        						<form action="{%url 'admins:view_batches' %}" method="post">
-         							{% csrf_token %}
-         							<input type="hidden" name="action" value="cancel" />
-         							<input type="hidden" name="batch_id" value="{{batch.id}}" />
-          							<input class="btn-xs btn-danger" type="submit" value="X" />
+        						{% if not batch.cancelled %}
+        						<form action="{% url 'admins:update_batch' batch.id %}" method="post">
+        						<input type="hidden" name="action" value="cancel" />
+        						<input class="btn-xs btn-danger" type="submit" value="Cancel" />
+        						{% elif batch.cancelled %}
+        						<form action="{% url 'admins:update_batch' batch.id %}" method="post">
+        						<input type="hidden" name="action" value="restart" />
+        						<input class="btn-xs btn-success" type="submit" value="Restart" />
+        							{% endif %}
+        							{% csrf_token %}
         						</form>
         					{% endif %}
       						</td>
+      						<td> DL </td>
          				<tr>
 					{% endfor %}
 		 		</tbody>

@@ -62,6 +62,28 @@ class BatchCreateView(CreateView):
         return redirect('admins:panel')
     #pass
 
+#have a cancel batch function,only POST
+@login_required
+@admin_required
+def update_batch(request,batch_id):
+    #pdb.set_trace()
+    batch = get_object_or_404(Batch,id=batch_id)
+    action = request.POST.get('action')
+    if action == 'cancel':
+        batch.is_cancelled = True
+    elif action == 'restart':
+        batch.is_cancelled = False
+    batch.save()
+    return redirect('admins:view_batches')
+
+
+
+
+#have a restart batch function, only POST
+
+#these both redirect back to view_batches
+
+
 @login_required
 @admin_required
 def view_batches(request):
@@ -90,23 +112,22 @@ def view_batches(request):
     admin_jobs = admin.job_set.all()
     admin_batches = dict()
     if request.POST:
-        action = request.POST.get('action')
-        batch_id = request.POST.get('batch_id')
-        batch = get_object_or_404(Batch,id=batch_id)
-        #pdb.set_trace()
-        if action == 'cancel':
-            batch.is_cancelled = True
-        elif action == 'restart':
-            batch.is_cancelled = False
-        batch.save()
+        # action = request.POST.get('action')
+        # batch_id = request.POST.get('batch_id')
+        # batch = get_object_or_404(Batch,id=batch_id)
+        # pdb.set_trace()
+        # if action == 'cancel':
+        #     batch.is_cancelled = True
+        # elif action == 'restart':
+        #     batch.is_cancelled = False
+        # batch.save()
+        pass
         #pdb.set_trace()
     else:
         pass
     for j in admin_jobs:
-            #admin_batches[j.title] = [batch_data(b) for b in Batch.objects.filter(job=j)]
         batch_stats = [batch_statistics(b) for b in Batch.objects.filter(job=j)]
         admin_batches[j.title] = batch_stats
-            #admin_batches[j.title] = list(Batch.objects.filter(job=j))
 
     context = {'batches':admin_batches}
     #pdb.set_trace()
