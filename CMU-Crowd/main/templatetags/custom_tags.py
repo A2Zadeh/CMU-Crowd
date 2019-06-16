@@ -12,3 +12,7 @@ def addcss(value, arg):
     if css_classes and arg not in css_classes:
         css_classes = '%s %s' % (css_classes, arg)
     return value.as_widget(attrs={'class': css_classes})
+
+@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key)

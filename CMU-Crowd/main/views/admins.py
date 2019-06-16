@@ -127,6 +127,7 @@ def view_batches(request):
     admin = Admin.objects.get(user=request.user)
     admin_jobs = admin.job_set.all()
     admin_batches = dict()
+    jobs = dict()
     if request.POST:
         # action = request.POST.get('action')
         # batch_id = request.POST.get('batch_id')
@@ -144,8 +145,9 @@ def view_batches(request):
     for j in admin_jobs:
         batch_stats = [batch_statistics(b) for b in Batch.objects.filter(job=j)]
         admin_batches[j.title] = batch_stats
+        jobs [j.title] = j.id
 
-    context = {'batches':admin_batches}
+    context = {'batches':admin_batches,'jobs':jobs}
     #pdb.set_trace()
     return render(request,'main/admins/view_batches.html',context)
 

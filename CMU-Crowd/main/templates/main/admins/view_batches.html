@@ -2,23 +2,31 @@
 {% load custom_tags %}
 
 {% block content %}
-<h1 class="text-center"> View Batches </h1>
+<h1 class="text-center"> Manage Jobs / Batches </h1>
 <hr />
 <div class="container">
-{% for k,v in batches.items %}
+{% for job_name,v in batches.items %}
+	<div class="row">
+		<div class="col">
+			<span class="inline h2"> {{job_name}} </span> 
+			<a href="{% url 'admins:update_job' jobs|get_item:job_name %}" class="btn btn-secondary mb-3"> Update </a>  
+			<a  href=" {{jobs|get_item:job_name}}" class="btn btn-danger mb-3">  Delete </a>
+		</div>
+	</div>
+
 	<div class="row">
 		<div class="col">
 			<table class="table">
 				<thead>
-				 <h2> {{k}} </h2>
+				 <!-- -->
 					<tr>
 						<th> ID </th>
 						<th> Number of HITs </th>
 						<th> Created Date </th>
 						<th> % Completed </th>
 						<th> Status </th>
-						<th> Cancel/Restart </th>
 						<th> Download </th>
+						<th> Cancel/Restart </th>
 					</tr>
 				</thead>
 				<tbody>
@@ -29,6 +37,7 @@
             				<td> {{batch.created_date}} </td>
             				<td> {{batch.percent_completion|floatformat:2 }} </td>
             				<td> <span class="badge badge-pill badge-{{batch.status_class}}"> _____ </span> </td>
+            				<td> DL </td>
             				<td>
         					{% if not batch.completed %}
         						{% if not batch.cancelled %}
@@ -44,7 +53,6 @@
         						</form>
         					{% endif %}
       						</td>
-      						<td> DL </td>
          				<tr>
 					{% endfor %}
 		 		</tbody>
