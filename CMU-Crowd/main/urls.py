@@ -14,6 +14,7 @@ urlpatterns = [
  path('admins/', include(([
         path('', admins.panel, name='panel'),
         path('job/add/',admins.JobCreateView.as_view(),name="create_job"),
+         path('job/update/<int:pk>', admins.JobUpdateView.as_view(), name='update_job'),
         path('batch/start/',admins.BatchCreateView.as_view(),name="start_batch"),
         path('batches',admins.view_batches,name="view_batches"),
         path('update_batch/<batch_id>',admins.update_batch,name="update_batch"),

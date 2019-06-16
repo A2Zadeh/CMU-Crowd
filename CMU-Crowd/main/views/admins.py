@@ -3,7 +3,7 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.shortcuts import redirect,render,get_object_or_404
-from django.views.generic import CreateView
+from django.views.generic import CreateView,UpdateView
 from main.models import User,Job,Admin,Batch,Worker,Annotation
 from ..forms import AdminSignUpForm
 from ..decorators import admin_required
@@ -39,7 +39,7 @@ def panel(request):
 class JobCreateView(CreateView):
     model = Job
     fields = ('title','description','hourly_pay','html_template',)
-    template_name = 'main/admins/create_job_form.html'
+    template_name = 'main/admins/create_job.html'
 
     def form_valid(self,form):
         job = form.save(commit=True)
@@ -48,6 +48,22 @@ class JobCreateView(CreateView):
         job.save()
         messages.success(self.request,"Job created successfully.")
         return redirect('admins:panel')
+
+@method_decorator([login_required, admin_required], name='dispatch')
+class JobUpdateView(UpdateView):
+    model = Job
+    fields = ('title','description','hourly_pay','html_template',)
+    template_name = 'main/admins/update_job.html'
+
+    def form_valid(self,form):
+        job = form.save(commit=True)
+        job.save()
+        messages.success(self.request,"Job updated successfully.")
+        return redirect('admins:panel')
+
+
+
+
 
 
 @method_decorator([login_required, admin_required], name='dispatch')

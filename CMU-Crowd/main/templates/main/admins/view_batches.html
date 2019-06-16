@@ -27,7 +27,7 @@
             				<th scope="row"> {{batch.id}} </th>
              				<td> {{batch.num_HITs}}</td>
             				<td> {{batch.created_date}} </td>
-            				<td> {{batch.percent_completion}} </td>
+            				<td> {{batch.percent_completion|floatformat:2 }} </td>
             				<td> <span class="badge badge-pill badge-{{batch.status_class}}"> _____ </span> </td>
             				<td>
         					{% if not batch.completed %}

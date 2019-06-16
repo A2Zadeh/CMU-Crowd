@@ -50,7 +50,6 @@ def view_annotations(request):
     return render(request,'main/workers/view_annotations.html',context)
 
 def jobs(request,job_id):
-    #active_jobs = Job.objects.all()
     job = Job.objects.get(id=job_id)
     template_url = job.html_template.url
     render_url = template_url.replace("/media/",'') #remove /media/ prefix
@@ -73,10 +72,7 @@ def jobs(request,job_id):
         return render(request,render_url,context)
     #TODO: ++ TO BATCH NUM COMPLETED HERE 
     else:
-        
         #pdb.set_trace()
         template = Template(job.html_template.read())
-        
-        #context  = {}
-        #context = {"hello":"Hello world"}
+        batch = Batch.objects.filter(job=job).filter(cancelled=False).filter(completed=False).first()
         return render(request,render_url,context)

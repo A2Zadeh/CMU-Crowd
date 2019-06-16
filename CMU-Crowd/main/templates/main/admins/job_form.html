@@ -1,0 +1,20 @@
+{% load custom_tags %}
+
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <input type="hidden" name="next" value="{{ next }}">
+  {% for field in form %}
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        {{field.label}}
+        {{field| addcss:'form-control'}}
+        {%if form.title.errors %}
+          <div class="alert alert-danger" style="margin-top:10px" role="alert">
+            {{ form.title.errors }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+       {% endfor %}
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>
