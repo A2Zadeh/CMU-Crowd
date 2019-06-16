@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.shortcuts import redirect,render
+from django.shortcuts import redirect,render,get_object_or_404
 from django.views.generic import CreateView
 from main.models import User,Job,Admin,Batch,Worker,Annotation
 from ..forms import AdminSignUpForm
@@ -66,24 +66,47 @@ class BatchCreateView(CreateView):
 @admin_required
 def view_batches(request):
 
-    # def batch_status(batch):
-    #     if batch.cancelled:
-    #         #danger
-    #     elif batch.completed:
-    #         #success
-    #     else:
-    #         #primary
-    def batch_data(batch):
-        #num_completed = Annotation.objects.filter(batch=b).count()
-        pass 
+    def batch_status_class(batch):
+        if batch.is_cancelled:
+            return 'danger'
+        elif batch.is_completed:
+            return 'success'
+        else: #active batch
+            return 'primary'
+    def batch_statistics(batch):
+        stats = dict()
+        stats['id'] = batch.id
+        stats['num_HITs'] = batch.num_HITs
+        stats['created_date'] = batch.created_date
+        num_completed = Annotation.objects.filter(batch=batch).count()
+        stats['percent_completion'] = (num_completed / batch.num_HITs) * 100
+        stats['cancelled'] = batch.is_cancelled
+        stats['completed'] = batch.is_completed
+        stats['status_class'] = batch_status_class(batch)
+        return stats 
 
 
     admin = Admin.objects.get(user=request.user)
     admin_jobs = admin.job_set.all()
     admin_batches = dict()
+    if request.POST:
+        action = request.POST.get('action')
+        batch_id = request.POST.get('batch_id')
+        batch = get_object_or_404(Batch,id=batch_id)
+        #pdb.set_trace()
+        if action == 'cancel':
+            batch.is_cancelled = True
+        elif action == 'restart':
+            batch.is_cancelled = False
+        batch.save()
+        #pdb.set_trace()
+    else:
+        pass
     for j in admin_jobs:
-        #admin_batches[j.title] = [batch_data(b) for b in Batch.objects.filter(job=j)]
-        admin_batches[j.title] = list(Batch.objects.filter(job=j))
+            #admin_batches[j.title] = [batch_data(b) for b in Batch.objects.filter(job=j)]
+        batch_stats = [batch_statistics(b) for b in Batch.objects.filter(job=j)]
+        admin_batches[j.title] = batch_stats
+            #admin_batches[j.title] = list(Batch.objects.filter(job=j))
 
     context = {'batches':admin_batches}
     #pdb.set_trace()

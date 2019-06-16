@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load custom_tags %}
 
 {% block content %}
 <h1 class="text-center"> View Batches </h1>
@@ -17,6 +18,7 @@
 						<th> % Completed </th>
 						<th> Download </th>
 						<th> Status </th>
+						<th> Cancel/Restart </th>
 					</tr>
 				</thead>
 				<tbody>
@@ -25,44 +27,45 @@
             				<th scope="row"> {{batch.id}} </th>
              				<td> {{batch.num_HITs}}</td>
             				<td> {{batch.created_date}} </td>
-            				<td> 1%</td>
+            				<td> {{batch.percent_completion}} </td>
             				<td> DL </td>
-            				<td> <span class="badge badge-pill badge-primary"> Active </span> </td>
+            				<td> <span class="badge badge-pill badge-{{batch.status_class}}"> _____ </span> </td>
+            				<td>
+        					{% if not batch.completed %}
+        						<form action="{%url 'admins:view_batches' %}" method="post">
+         							{% csrf_token %}
+         							<input type="hidden" name="action" value="cancel" />
+         							<input type="hidden" name="batch_id" value="{{batch.id}}" />
+          							<input class="btn-xs btn-danger" type="submit" value="X" />
+        						</form>
+        					{% endif %}
+      						</td>
          				<tr>
-							   {{batch}}, {{batch.num_HITs}} HITs <a href="#"> Download data as JSON</a>
 					{% endfor %}
 		 		</tbody>
 		</table>
 {% endfor %}
 		</div>
 	</div>
-{% endblock %}
 
-<!--
-<h1 class="text-center"> View Annotations </h1>
-<hr />
-<div class="container">
-  <div class="row">
-	 <div class="col">
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Job</th>
-          <th scope="col">Date Submitted</th>
-          <th scope="col">Hourly Pay</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr>
-             <th scope="row"> {{a.id}} </th>
-             <td> {{a.batch.job.title}} </td>
-             <td> {{a.created_date}} </td>
-             <td> {{a.batch.job.hourly_pay}} </td>
-          <tr>
-      </tbody>
-    </table>
-    </div>
-  </div>
-</div>
--->
+
+<script>
+ function setStatusText() {
+ 	// Sets status text based on batch.status_class 
+ 	badges = document.getElementsByClassName('badge-pill');
+ 	for (let badge of badges) {
+ 		classes = badge.className.split(' ');
+ 		if (classes.includes('badge-primary')) {
+ 			badge.innerText = 'Active';
+ 		} else if (classes.includes('badge-danger')) {
+ 			badge.innerText = 'Cancelled';
+ 		} else if (classes.includes('badge-success')) {
+ 			badge.innerText = 'Completed';
+ 		}
+ 	}
+ }
+
+setStatusText()
+</script>
+
+{% endblock %}
