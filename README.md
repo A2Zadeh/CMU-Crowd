@@ -91,6 +91,10 @@ When creating a batch
 - give the number of HITs
 
 
+## License
 
+This project is licensed under ....
 
-## TODO:
+## Contact
+
+Please open an issue or contact mkchan@cs.cmu.edu for any feedback and issues.
