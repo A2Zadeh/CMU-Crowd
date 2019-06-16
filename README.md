@@ -96,5 +96,6 @@ When creating a batch
 This project is licensed under ....
 
 ## Contact
+CMU-Crowd is an ongoing project. 
 
-Please open an issue or contact mkchan@cs.cmu.edu for any feedback and issues.
+Please open an issue or contact mkchan@cs.cmu.edu for any feedback and suggestions.
