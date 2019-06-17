@@ -10,7 +10,9 @@
 		<div class="col">
 			<span class="inline h2"> {{job_name}} </span> 
 			<a href="{% url 'admins:update_job' jobs|get_item:job_name %}" class="btn btn-secondary mb-3"> Update </a>  
+			{% if not v %}
 			<a  href=" {% url 'admins:delete_job' jobs|get_item:job_name %}" class="btn btn-danger mb-3">  Delete </a>
+			{% endif %}
 		</div>
 	</div>
 

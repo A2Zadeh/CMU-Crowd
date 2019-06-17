@@ -65,6 +65,7 @@ class JobUpdateView(UpdateView):
 class JobDeleteView(DeleteView):
     model = Job
     template_name = 'main/admins/confirm_delete_job.html'
+    success_url = '/'
 
 
 
@@ -159,7 +160,6 @@ def view_batches(request):
         batch_stats = [batch_statistics(b) for b in Batch.objects.filter(job=j)]
         admin_batches[j.title] = batch_stats
         jobs [j.title] = j.id
-
     context = {'batches':admin_batches,'jobs':jobs}
     #pdb.set_trace()
     return render(request,'main/admins/view_batches.html',context)
