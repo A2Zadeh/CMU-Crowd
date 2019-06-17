@@ -10,8 +10,10 @@
 	<div class="col">
 		<h4>  <a  class="btn btn-lg btn-primary float-right" href="{% url 'workers:jobs' last_job.id %}"> Continue working on:  {{last_job.title}} </a> </h4>
 	</div>
+	<div class="col">
+	{% else %}
+		<div class="col text-center">
 	{% endif %}
-	<div class="col text-center">
 			<h4> <a  class="btn btn-lg btn-primary" href="mailto:{{admin_email}}"> Contact an Admin </a> </h4>
 	</div>
 </div>

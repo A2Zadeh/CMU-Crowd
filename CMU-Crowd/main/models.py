@@ -19,6 +19,7 @@ class Worker(models.Model):
   is_approved = models.BooleanField(default=False)  
   ##TODO: manually approve worker for each job, worker has a list of approved jobs (job ids)
   ##TODO: statistics of jobs done fields?
+  is_suspended = models.BooleanField(default=False)
 
 
 
