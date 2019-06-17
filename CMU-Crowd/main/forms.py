@@ -51,15 +51,24 @@ class JobForm(BaseForm):
     #todo: validation here
 
 class BatchForm(BaseForm):
+
+  content = forms.CharField(widget=forms.Textarea,required=False)
+
   class Meta:
     model = Batch
     fields = ('job','content','num_HITs')
-
     #validation
   def clean_content(self):
     data = self.cleaned_data['content']
-    try:
-      json.loads(data)
-    except:
-      raise forms.ValidationError("Please enter a valid JSON.")
+    if data != '': #no content provided
+      try:
+        json.loads(data)
+      except:
+        raise forms.ValidationError("Please enter a valid JSON.")
     return data
+
+  # def clean(self):
+  #   content = self.cleaned_data['content']
+  #   num_HITs = self.cleaned_data['num_HITs']
+  #   if len(json.loads(content)) != num_HITs:
+  #     raise forms.ValidationError("JSON length is not the same as number of HITs.")

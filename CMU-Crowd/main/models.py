@@ -51,6 +51,7 @@ class Annotation(models.Model):
   modified_date = models.DateTimeField(auto_now=True)
   worker = models.ForeignKey(Worker,null=True,on_delete=models.SET_NULL)
   batch = models.ForeignKey(Batch,on_delete=models.PROTECT)
+  #batch_content_index = 
   content = models.TextField()
   #TODO: time tracking for how long annotation took
 
