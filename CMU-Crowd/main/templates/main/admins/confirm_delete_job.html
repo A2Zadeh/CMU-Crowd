@@ -1,10 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Contact Delete?</h1>
-<form  method="post">
-{% csrf_token %}
-Are you sure you want to delete this contact?
-<input  type="submit"  value="Submit"  />
-</form>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2> Delete Job </h2>
+    </div>
+  </div>
+  <form  method="post">
+	{% csrf_token %}
+	Are you sure you want to delete this job?
+	<input  type="submit"  value="Confirm"  />
+  </form>
+</div>
 {% endblock %}

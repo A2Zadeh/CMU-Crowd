@@ -3,7 +3,7 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.shortcuts import redirect,render,get_object_or_404
-from django.views.generic import CreateView,UpdateView
+from django.views.generic import CreateView,UpdateView,DeleteView
 from main.models import User,Job,Admin,Batch,Worker,Annotation
 from ..forms import AdminSignUpForm,BatchForm
 from ..decorators import admin_required
@@ -61,8 +61,10 @@ class JobUpdateView(UpdateView):
         messages.success(self.request,"Job updated successfully.")
         return redirect('admins:panel')
 
-
-
+@method_decorator([login_required, admin_required], name='dispatch')
+class JobDeleteView(DeleteView):
+    model = Job
+    template_name = 'main/admins/confirm_delete_job.html'
 
 
 

@@ -52,13 +52,10 @@ def view_annotations(request):
 def jobs(request,job_id):
     job = Job.objects.get(id=job_id)
     template_url = job.html_template.url
-    render_url = template_url.replace("/media/",'') #remove /media/ prefix
-    context = {}
-    #get batch here, should be oldest batch not completed && cancelled
+    render_url = template_url.replace("/media/","") #remove /media/ prefix
+    #oldest batch not completed && cancelled
+    current_batch = Batch.objects.filter(job=job).first()
     if request.method == 'POST':
-        #FOR NOW, just taking the first batch for job!
-        current_batch = Batch.objects.filter(job=job).first()
-        #pdb.set_trace()
         content_dict = {k: v for k, v in request.POST.items() 
         if k != 'csrfmiddlewaretoken'} #remove csrftoken
         #Create annotation object 
@@ -68,9 +65,9 @@ def jobs(request,job_id):
             batch = current_batch,
             content=json.dumps(content_dict),
             )
+        current_batch.num_completed += 1
         #context = {"hello":"Hello world"}
         return render(request,render_url,context)
-    #TODO: ++ TO BATCH NUM COMPLETED HERE 
     else:
         #pdb.set_trace()
         template = Template(job.html_template.read())
