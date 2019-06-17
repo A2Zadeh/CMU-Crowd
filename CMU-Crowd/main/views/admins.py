@@ -5,7 +5,7 @@ from django.utils.decorators import method_decorator
 from django.shortcuts import redirect,render,get_object_or_404
 from django.views.generic import CreateView,UpdateView
 from main.models import User,Job,Admin,Batch,Worker,Annotation
-from ..forms import AdminSignUpForm
+from ..forms import AdminSignUpForm,BatchForm
 from ..decorators import admin_required
 
 import pdb
@@ -69,8 +69,19 @@ class JobUpdateView(UpdateView):
 @method_decorator([login_required, admin_required], name='dispatch')
 class BatchCreateView(CreateView):
     model = Batch
-    fields = ('job','content','num_HITs')
+    form_class = BatchForm
+    #fields = ('job','content','num_HITs')
     template_name = "main/admins/create_batch_form.html"
+
+    def form_invalid(self,form,**kwargs):
+        context = self.get_context_data(**kwargs)
+        context["errors"] = context["form"].errors
+        #errors = []
+        #for error in context["form"].errors:
+            #errors.extend(context["form"].errors[error])
+        #context["errors"] = errors
+        #pdb.set_trace()
+        return self.render_to_response(context)
 
     def form_valid(self,form):
         batch = form.save(commit=True)

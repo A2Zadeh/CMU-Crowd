@@ -2,20 +2,20 @@
 {% load custom_tags %}
 
 {% block content %}
-  {% if form.non_field_errors %}
+
+  <div class="container">
+    <div class="row">
+      <div class="col">
+          {% if errors %}
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-      {% for error in form.non_field_errors %}
-        <p{% if forloop.last %} class="mb-0"{% endif %}>{{ error }}</p>
+      {% for fieldname,error in errors.items %}
+        <p {% if forloop.last %} class="mb-0"{% endif %}>{{fieldname | title }} field: {{error }}</p>
       {% endfor %}
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
   {% endif %}
-
-  <div class="container">
-    <div class="row">
-      <div class="col">
         <h2> Create Batch</h2>
       </div>
     </div>

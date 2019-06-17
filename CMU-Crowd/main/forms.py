@@ -1,14 +1,15 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
-from main.models import Worker,Admin,User,Job
-
+from main.models import Worker,Admin,User,Job,Batch
+import json
 
 class BaseForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(BaseForm, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control'
+          pass
+            #field.widget.attrs['class'] = 'form-control'
 
 
 class WorkerSignUpForm(UserCreationForm):
@@ -48,3 +49,17 @@ class JobForm(BaseForm):
     #    'description': forms.TextInput(attrs={'class': 'form-control'})
     # }
     #todo: validation here
+
+class BatchForm(BaseForm):
+  class Meta:
+    model = Batch
+    fields = ('job','content','num_HITs')
+
+    #validation
+  def clean_content(self):
+    data = self.cleaned_data['content']
+    try:
+      json.loads(data)
+    except:
+      raise forms.ValidationError("Please enter a valid JSON.")
+    return data
