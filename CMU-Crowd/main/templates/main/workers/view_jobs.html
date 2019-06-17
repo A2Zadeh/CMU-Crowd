@@ -11,7 +11,7 @@
           <li class="media">
             <img src="https://pbs.twimg.com/profile_images/469017630796296193/R-bEN4UP.png" class="mr-3" alt="..." width="140px">
             <div class="media-body">
-              <h5 class="mt-0 mb-1"> {{j.title}} </h5>
+              <h5 class="mt-0 mb-1"> <a href="{% url 'workers:jobs' j.id %}"> {{j.title}} </a> </h5>
                 {{j.description}}
             </div>
           </li>

@@ -45,6 +45,7 @@ class Batch(models.Model):
   num_HITs = models.IntegerField(default=10)
   is_completed = models.BooleanField(default=False)
   is_cancelled = models.BooleanField(default=False)
+  num_completed = models.IntegerField(default=0)
 
 class Annotation(models.Model):
   created_date = models.DateTimeField(auto_now_add=True)

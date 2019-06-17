@@ -54,18 +54,21 @@ def view_annotations(request):
 
 def batches_complete(job):
     batches = Batch.objects.filter(job=job)
-    done = [b.completed or b.cancelled for b in batches]
+    done = [b.is_completed or b.is_cancelled for b in batches]
     return all(done)
+
 
 def jobs(request,job_id):
     job = Job.objects.get(id=job_id)
     if batches_complete(job):
-        return redirect('workers:job_complete')
+        return render(request,'main/workers/job_complete.html')
+        #return redirect('workers:job_complete')
 
     template_url = job.html_template.url
     render_url = template_url.replace("/media/","") #remove /media/ prefix
     #oldest batch not completed && cancelled
-    current_batch = Batch.objects.filter(job=job).filter(completed=False).filter(cancelled=False).first()
+    current_batch = Batch.objects.filter(job=job).filter(is_completed=False).filter(is_cancelled=False).first()
+    batch_content = json.loads(current_batch.content)
     if request.method == 'POST':
         content_dict = {k: v for k, v in request.POST.items() 
         if k != 'csrfmiddlewaretoken'} #remove csrftoken
@@ -85,9 +88,10 @@ def jobs(request,job_id):
             current_batch.is_completed = True
             current_batch.save()
         #context = {"hello":"Hello world"}
+        context = batch_content[current_batch.num_completed]
         return render(request,render_url,context)
     else:
         #template = Template(job.html_template.read())
         #batch = Batch.objects.filter(job=job).filter(cancelled=False).filter(completed=False).first()
-        context = current_batch.content[current_batch.num_completed]
+        context = batch_content[current_batch.num_completed]
         return render(request,render_url,context)
