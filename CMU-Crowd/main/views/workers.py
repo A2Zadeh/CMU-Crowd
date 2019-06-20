@@ -58,7 +58,6 @@ def jobs(request, job_id):
         return render(request, 'main/workers/job_complete.html')
 
     template_url = job.html_template.url
-    pdb.set_trace()
     render_url = template_url.replace("/media/", "") #remove /media/ prefix
     #Oldest batch not completed && cancelled
     current_batch = (Batch.objects.filter(job=job).filter(is_completed=False)

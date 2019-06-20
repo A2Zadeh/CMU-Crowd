@@ -89,7 +89,6 @@ class BatchCreateView(CreateView):
 @login_required
 @admin_required
 def update_batch(request, batch_id):
-    #pdb.set_trace()
     batch = get_object_or_404(Batch, id=batch_id)
     action = request.POST.get('action')
     if action == 'cancel':
@@ -131,7 +130,6 @@ def view_batches(request):
         admin_batches[j.title] = batch_stats
         jobs[j.title] = j.id
     context = {'batches':admin_batches, 'jobs':jobs}
-    #pdb.set_trace()
     return render(request, 'main/admins/view_batches.html', context)
 
 @login_required
