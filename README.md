@@ -7,7 +7,7 @@ It may be used as a complete solution by simply providing HTML templates for job
 ## Setup
 
 ### Requirements: 
-python 3.x, tested with 3.6 and 3.7
+python 3.x, tested with 3.5.2, 3.6 and 3.7
 
 1. (recommended) Activate a virtual enviroment 
 ```console
@@ -28,14 +28,6 @@ pip3 install -r requirements.txt
 ./manage.py runserver
 ```
 You should now have an instance of the webapp running on your localhost.
-
-
-
-
-
-## Functionality
-### Fully customisable
-As CMU-Crowd is a Django webapp, you can easily edit the classes in models.py to add more fields to the worker and admin models if required. It is also easy to add new pages. For getting started with django, [this guide](https://docs.djangoproject.com/en/2.1/intro/tutorial01/) as well as their official documentation is recommended.
 
 ## Usage
 
