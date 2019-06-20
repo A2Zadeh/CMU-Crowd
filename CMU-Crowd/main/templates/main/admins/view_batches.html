@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 {% load custom_tags %}
-
+{% block title %}View Batches{% endblock %}
 {% block content %}
 <h1 class="text-center"> Manage Jobs / Batches </h1>
 <hr />
 <div class="container">
-{% for job_name,v in batches.items %}
+{% for job_name,batches in batches.items %}
 	<div class="row">
 		<div class="col">
 			<span class="inline h2"> {{job_name}} </span> 
 			<a href="{% url 'admins:update_job' jobs|get_item:job_name %}" class="btn btn-secondary mb-3"> Update </a>  
-			{% if not v %}
+			{% if not batches %}
 			<a  href=" {% url 'admins:delete_job' jobs|get_item:job_name %}" class="btn btn-danger mb-3">  Delete </a>
 			{% endif %}
 		</div>
@@ -20,26 +20,23 @@
 		<div class="col">
 			<table class="table">
 				<thead>
-				 <!-- -->
 					<tr>
 						<th> ID </th>
 						<th> Number of HITs </th>
 						<th> Created Date </th>
 						<th> % Completed </th>
 						<th> Status </th>
-						<th> Download </th>
 						<th> Cancel/Restart </th>
 					</tr>
 				</thead>
 				<tbody>
-					{%for batch in v %}
+					{%for batch in batches %}
 						<tr>
             				<th scope="row"> {{batch.id}} </th>
              				<td> {{batch.num_HITs}}</td>
             				<td> {{batch.created_date}} </td>
             				<td> {{batch.percent_completion|floatformat:2 }} </td>
             				<td> <span class="badge badge-pill badge-{{batch.status_class}}"> _____ </span> </td>
-            				<td> DL </td>
             				<td>
         					{% if not batch.completed %}
         						{% if not batch.cancelled %}

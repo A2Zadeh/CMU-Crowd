@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load custom_tags %}
-
+{% block title %}Create Batch{% endblock %}
 {% block content %}
 
   <div class="container">
@@ -40,17 +40,4 @@
     </div>
   </div>
 </div>
-  <!--
-  <div class="row">
-    <div class="col-md-8 col-sm-10 col-12">
-      <h2>Start Batch</h2>
-      <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input type="hidden" name="next" value="{{ next }}">
-        {{ form }}
-        <button type="submit" class="btn btn-success">Submit</button>
-      </form>
-    </div>
-  </div>
--->
 {% endblock %}
