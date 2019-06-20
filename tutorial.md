@@ -3,7 +3,7 @@ This tutorial will provide a simple example of setting up an annotation system o
 how many calories users consume for lunch.
 
 ## Prerequisites
-Follow the setup instructions in the README.
+Follow the setup instructions in the [README](README.md).
 
 
 ## Job Creation
