@@ -82,7 +82,7 @@ For a step by step process on launching a job, refer to the [tutorial].
 
 ## License
 
-This project is licensed under the [MIT License].
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
 ## Contact
 CMU-Crowd is an ongoing project. 
