@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+	<form method="post">
+	{% csrf_token %}
+	  <p>  What is your height? </p>
+	  <input type="text" name="height">
+	    <p>  What is your weight? </p>
+	  <input type="text" name="weight">
+	      <p>  What is your gender? </p>
+	  <input type="text" name="gender">
+	  <p> What did you eat for lunch? </p>
+	    <input type="text" name="food">
+	    <p> How many calories did this have? </p>
+	    <input type="text" name="calories">
+	<button type="submit" class="btn btn-success"> Submit </button>
+	</form>
+</div>
+{% endblock %}
