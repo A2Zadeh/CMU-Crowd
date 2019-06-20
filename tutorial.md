@@ -44,6 +44,8 @@ Now that we have our job created, we have to launch a batch so workers can begin
 
 
 ## Annotating
-Our job is now ready for annotation by workers. Sign up as a worker to being annotating. You should see a page similar to the one below. 
+Our job is now ready for annotation by workers. Sign up as a worker to being annotating. You should see a page similar to the one below.It looks pretty plain, but you can always link your own CSS and JS files as needed. 
+
+
 
 
