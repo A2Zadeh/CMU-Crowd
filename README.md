@@ -29,12 +29,7 @@ pip3 install -r requirements.txt
 ```
 You should now have an instance of the webapp running on your localhost.
 
-## Deployment
 
-## Built With
-[Django](https://www.djangoproject.com/)
-
-[Bootstrap](https://getbootstrap.com/)
 
 
 
@@ -85,20 +80,17 @@ and access the data as follows:
 <p> Question 1: {{question}} </p>
 ```
 
-
-### How data is saved
-
 ### Launching Jobs
-To create a job, you must 
+For a step by step process on launching a job, refer to the [tutorial].
+## Built With
+[Django](https://www.djangoproject.com/)
 
-When creating a batch
-- supply list of json dictionaries for each HIT
-- give the number of HITs
+[Bootstrap](https://getbootstrap.com/)
 
 
 ## License
 
-This project is licensed under ....
+This project is licensed under the [MIT License].
 
 ## Contact
 CMU-Crowd is an ongoing project. 
