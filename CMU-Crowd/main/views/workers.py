@@ -23,34 +23,28 @@ class WorkerSignUpView(CreateView):
 
 
 def dash(request):
-    #TODO: jobs that have one or more active batches
-  active_jobs = Job.objects.all()
-  worker = Worker.objects.get(user=request.user)
-  work_done = Annotation.objects.filter(worker=worker).count()
-  context = {'jobs':active_jobs,
-                    'work_done':work_done,
-                    'last_job': None,
-                    'admin_email':settings.CONTACT_EMAIL
-                    }
-  if work_done > 0:
-    last_job_done  = Annotation.objects.filter(worker=worker).last().batch.job
-    context['last_job'] = last_job_done
- 
-  #pdb.set_trace()
-  return render(request,'main/workers/dash.html',context)
+    worker = Worker.objects.get(user=request.user)
+    work_done = Annotation.objects.filter(worker=worker).count()
+    context = {'work_done':work_done,
+               'last_job': None,
+               'admin_email':settings.CONTACT_EMAIL
+               }
+    if work_done > 0:
+        last_job_done = Annotation.objects.filter(worker=worker).last().batch.job
+        context['last_job'] = last_job_done
+    return render(request, 'main/workers/dash.html', context)
 
 
 def view_jobs(request):
-    worker = Worker.objects.get(user=request.user)
-    jobs = Job.objects.all() #change to only approved jobs later 
+    jobs = Job.objects.all()
     context = {"jobs":jobs}
-    return render(request,'main/workers/view_jobs.html',context)
+    return render(request, 'main/workers/view_jobs.html', context)
 
 def view_annotations(request):
     worker = Worker.objects.get(user=request.user)
     annotations = Annotation.objects.filter(worker=worker)
     context = {"annotations":annotations}
-    return render(request,'main/workers/view_annotations.html',context)
+    return render(request,'main/workers/view_annotations.html', context)
 
 def batches_complete(job):
     batches = Batch.objects.filter(job=job)
@@ -58,28 +52,27 @@ def batches_complete(job):
     return all(done)
 
 
-def jobs(request,job_id):
+def jobs(request, job_id):
     job = Job.objects.get(id=job_id)
     if batches_complete(job):
-        return render(request,'main/workers/job_complete.html')
-        #return redirect('workers:job_complete')
+        return render(request, 'main/workers/job_complete.html')
 
     template_url = job.html_template.url
-    render_url = template_url.replace("/media/","") #remove /media/ prefix
-    #oldest batch not completed && cancelled
-    current_batch = Batch.objects.filter(job=job).filter(is_completed=False).filter(is_cancelled=False).first()
+    render_url = template_url.replace("/media/", "") #remove /media/ prefix
+    #Oldest batch not completed && cancelled
+    current_batch = (Batch.objects.filter(job=job).filter(is_completed=False)
+                     .filter(is_cancelled=False).first())
     batch_content = json.loads(current_batch.content)
     if request.method == 'POST':
-        content_dict = {k: v for k, v in request.POST.items() 
-        if k != 'csrfmiddlewaretoken'} #remove csrftoken
-        #Create annotation object 
-        worker = Worker.objects.get(user=request.user) 
+        content_dict = {k: v for k, v in request.POST.items()
+                        if k != 'csrfmiddlewaretoken'} #remove csrftoken
+        worker = Worker.objects.get(user=request.user)
 
-        #TODO: error handling
+        #Create annotation object
         Annotation.objects.create(
             worker=worker,
-            batch = current_batch,
-            batch_content_index= current_batch.num_completed,
+            batch=current_batch,
+            batch_content_index=current_batch.num_completed,
             content=json.dumps(content_dict),
             )
         current_batch.num_completed += 1
@@ -87,11 +80,5 @@ def jobs(request,job_id):
         if current_batch.num_completed == current_batch.num_HITs:
             current_batch.is_completed = True
             current_batch.save()
-        #context = {"hello":"Hello world"}
-        context = batch_content[current_batch.num_completed]
-        return render(request,render_url,context)
-    else:
-        #template = Template(job.html_template.read())
-        #batch = Batch.objects.filter(job=job).filter(cancelled=False).filter(completed=False).first()
-        context = batch_content[current_batch.num_completed]
-        return render(request,render_url,context)
+    context = batch_content[current_batch.num_completed]
+    return render(request, render_url, context)

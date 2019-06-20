@@ -34,7 +34,6 @@ body {
 
 <body>
         <header>
-          <!-- 3 diff navbars, one for home page (when not logged in, one for worker login, one for admin login -->
           {% if request.user.is_authenticated %}
             {% if request.user.is_worker %}
                {% include 'worker_navbar.html' %}

@@ -30,3 +30,4 @@ def admin_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login
     if function:
         return actual_decorator(function)
     return actual_decorator
+    
