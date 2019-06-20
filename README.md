@@ -7,7 +7,7 @@ It may be used as a complete solution by simply providing HTML templates for job
 ## Setup
 
 ### Requirements: 
-python 3.x, tested with 3.6 and 3.7
+python 3.x, tested with 3.5.2, 3.6 and 3.7
 
 1. (recommended) Activate a virtual enviroment 
 ```console
@@ -28,19 +28,6 @@ pip3 install -r requirements.txt
 ./manage.py runserver
 ```
 You should now have an instance of the webapp running on your localhost.
-
-## Deployment
-
-## Built With
-[Django](https://www.djangoproject.com/)
-
-[Bootstrap](https://getbootstrap.com/)
-
-
-
-## Functionality
-### Fully customisable
-As CMU-Crowd is a Django webapp, you can easily edit the classes in models.py to add more fields to the worker and admin models if required. It is also easy to add new pages. For getting started with django, [this guide](https://docs.djangoproject.com/en/2.1/intro/tutorial01/) as well as their official documentation is recommended.
 
 ## Usage
 
@@ -85,20 +72,17 @@ and access the data as follows:
 <p> Question 1: {{question}} </p>
 ```
 
-
-### How data is saved
-
 ### Launching Jobs
-To create a job, you must 
+For a step by step process on launching a job, refer to the [tutorial](tutorial.md).
+## Built With
+[Django](https://www.djangoproject.com/)
 
-When creating a batch
-- supply list of json dictionaries for each HIT
-- give the number of HITs
+[Bootstrap](https://getbootstrap.com/)
 
 
 ## License
 
-This project is licensed under ....
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
 ## Contact
 CMU-Crowd is an ongoing project. 
