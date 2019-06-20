@@ -39,7 +39,7 @@ Note that {{meal}} is going to be a randomly generated meal choice from breakfas
 
 ### Batch Creation
 Now that we have our job created, we have to launch a batch so workers can begin annotating.  Go to the 'Start Batch' tab on the navigation bar. Select the job you created in the Job field. For this example, I will pass a list of 4 JSON dictionaries, each with a meal key to be passed to the HTML template's {{meal}} tag. Ensure that your number of HITs matches the amount of total annotations you would like in your batch, and the length of the JSON list in the content field.
-![Screenshot](start_batch.png)
+![Screenshot](start_batch.jpg)
 
 
 
