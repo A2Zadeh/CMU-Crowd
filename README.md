@@ -73,7 +73,7 @@ and access the data as follows:
 ```
 
 ### Launching Jobs
-For a step by step process on launching a job, refer to the [tutorial].
+For a step by step process on launching a job, refer to the [tutorial](tutorial.md).
 ## Built With
 [Django](https://www.djangoproject.com/)
 
